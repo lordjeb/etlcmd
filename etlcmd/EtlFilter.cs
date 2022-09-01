@@ -44,6 +44,7 @@ namespace etlcmd
         private readonly int endingId = -1;
         private readonly int includedProviderCount;
         private readonly int includedEventCount;
+        private readonly int includedActivityId;
         private EtlProcessorBaseHelpers helpers = new EtlProcessorBaseHelpers();
 
         public EtlProcessorBase(FilterOptions options)
@@ -60,8 +61,9 @@ namespace etlcmd
                 this.endingId = ParseRange(options.Range.Last(), -1);
             }
 
-            includedProviderCount = options.IncludeProviderName.Count();
-            includedEventCount = options.IncludeEventName.Count();
+            includedProviderCount = options.MatchProviderName.Count();
+            includedEventCount = options.MatchEventName.Count();
+            includedActivityId = options.MatchActivityId.Count();
         }
 
         public int EventsFiltered { get => eventsFiltered; }
@@ -122,8 +124,9 @@ namespace etlcmd
             if (data.Level > (TraceEventLevel)options.IncludeLevel ||
                 eventsProcessed < startingId ||
                 (endingId != -1 && eventsProcessed > endingId) ||
-                (includedProviderCount > 0 && !options.IncludeProviderName.Contains(data.ProviderName)) ||
-                (includedEventCount > 0 && !options.IncludeEventName.Contains(data.EventName)) ||
+                (includedProviderCount > 0 && !options.MatchProviderName.Contains(data.ProviderName)) ||
+                (includedEventCount > 0 && !options.MatchEventName.Contains(data.EventName)) ||
+                (includedActivityId > 0 && !options.MatchActivityId.Contains(data.ActivityID.ToString())) ||
                 (!string.IsNullOrEmpty(options.MatchPayload) && !payloadData.Contains(options.MatchPayload))
                 )
             {
@@ -235,7 +238,8 @@ namespace etlcmd
 
             if (!options.Quiet)
             {
-                Console.WriteLine("{0} Events Filtered, {1} Events Processed in {2}", processor.EventsFiltered, processor.EventsProcessed, timer.Elapsed);
+                Console.WriteLine("{3} Events Matched, {0} Events Filtered, {1} Events Processed in {2}", processor.EventsFiltered,
+                    processor.EventsProcessed, timer.Elapsed, processor.EventsProcessed - processor.EventsFiltered);
             }
         }
     }

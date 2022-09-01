@@ -20,10 +20,10 @@ namespace etlcmd
         public bool Quiet { get; set; }
 
         [Option('p', "include-provider", Required = false, HelpText = "Include trace data from providers.")]
-        public IEnumerable<string> IncludeProviderName { get; set; }
+        public IEnumerable<string> MatchProviderName { get; set; }
 
         [Option('e', "include-event", Required = false, HelpText = "Include trace data matching event names.")]
-        public IEnumerable<string> IncludeEventName { get; set; }
+        public IEnumerable<string> MatchEventName { get; set; }
 
         [Option('l', "level", Required = false, HelpText = "Include trace data of level or more important.", Default = 5)]
         public int IncludeLevel { get; set; }
@@ -33,6 +33,9 @@ namespace etlcmd
 
         [Option('m', "match-payload", Required = false, HelpText = "Include trace data whose payload contains match string.")]
         public string MatchPayload { get; set; }
+
+        [Option('a', "activityid", Required = false, HelpText = "Include trace data matching activity id.")]
+        public IEnumerable<string> MatchActivityId { get; set; }
     }
 
     internal class Program
