@@ -19,10 +19,10 @@ namespace etlcmd
         [Option('q', "quiet", Required = false, HelpText = "Quiet output.")]
         public bool Quiet { get; set; }
 
-        [Option('p', "include-provider", Required = false, HelpText = "Include trace data from provider.")]
+        [Option('p', "include-provider", Required = false, HelpText = "Include trace data from providers.")]
         public IEnumerable<string> IncludeProviderName { get; set; }
 
-        [Option('e', "include-event", Required = false, HelpText = "Include trace data matching event name.")]
+        [Option('e', "include-event", Required = false, HelpText = "Include trace data matching event names.")]
         public IEnumerable<string> IncludeEventName { get; set; }
 
         [Option('l', "level", Required = false, HelpText = "Include trace data of level or more important.", Default = 5)]

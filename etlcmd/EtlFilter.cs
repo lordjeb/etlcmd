@@ -16,9 +16,23 @@ namespace etlcmd
         }
     }
 
-    internal static class EtlProcessorBaseHelpers
+    internal class EtlProcessorBaseHelpers
     {
-        public static readonly string FORMAT_STRING = "{0,-8} {1,16:F4} {2,-30} {3,-8} {4,-65}";
+        private static readonly string FORMAT_STRING = "{0,-8} {1,16:F4} {2,-30} {3,-13} ";//{4,-65}";
+        private readonly string formatString;
+        private readonly int remainingLength;
+
+        public EtlProcessorBaseHelpers()
+        {
+            remainingLength = Console.LargestWindowWidth - string.Format(FORMAT_STRING, "", "", "", "").Length - 1;
+            formatString = FORMAT_STRING + $"{{4,-{remainingLength}}}";
+        }
+
+        public string GetFormatString(out int remainingLength)
+        {
+            remainingLength = this.remainingLength;
+            return formatString;
+        }
     }
 
     internal abstract class EtlProcessorBase
@@ -30,6 +44,8 @@ namespace etlcmd
         private readonly int endingId = -1;
         private readonly int includedProviderCount;
         private readonly int includedEventCount;
+        private EtlProcessorBaseHelpers helpers = new EtlProcessorBaseHelpers();
+
         public EtlProcessorBase(FilterOptions options)
         {
             this.options = options;
@@ -83,12 +99,13 @@ namespace etlcmd
         {
             if (options.Verbose)
             {
-                Console.WriteLine(EtlProcessorBaseHelpers.FORMAT_STRING,
+                int remainingLength;
+                Console.WriteLine(helpers.GetFormatString(out remainingLength),
                     eventsProcessed,
                     data.TimeStampRelativeMSec,
                     data.EventName.Truncate(30),
                     data.Level.ToString(),
-                    payloadData.Truncate(65));
+                    payloadData.Truncate(remainingLength));
             }
         }
 
@@ -101,28 +118,19 @@ namespace etlcmd
             }
             payloadData = string.Join(", ", payload);
 
-            // Move some of these tests outside into the ctor?
-            bool included = false;
-            if (
-                (includedProviderCount == 0 && includedEventCount == 0) ||
-                (includedProviderCount > 0 && options.IncludeProviderName.Contains(data.ProviderName)) ||
-                (includedEventCount > 0 && options.IncludeEventName.Contains(data.EventName))
-                )
-            {
-                included = true;
-            }
-
             bool filtered = false;
             if (data.Level > (TraceEventLevel)options.IncludeLevel ||
                 eventsProcessed < startingId ||
                 (endingId != -1 && eventsProcessed > endingId) ||
+                (includedProviderCount > 0 && !options.IncludeProviderName.Contains(data.ProviderName)) ||
+                (includedEventCount > 0 && !options.IncludeEventName.Contains(data.EventName)) ||
                 (!string.IsNullOrEmpty(options.MatchPayload) && !payloadData.Contains(options.MatchPayload))
                 )
             {
                 filtered = true;
             }
 
-            if (included && !filtered)
+            if (!filtered)
             {
                 return false;
             }
@@ -191,6 +199,7 @@ namespace etlcmd
     internal class EtlFilter
     {
         private readonly FilterOptions options;
+        private EtlProcessorBaseHelpers helpers = new EtlProcessorBaseHelpers();
 
         public EtlFilter(FilterOptions options)
         {
@@ -211,8 +220,10 @@ namespace etlcmd
 
             if (options.Verbose)
             {
-                Console.WriteLine(EtlProcessorBaseHelpers.FORMAT_STRING, "ID", "RelativeTime", "EventName", "Level", "Payload");
-                Console.WriteLine(EtlProcessorBaseHelpers.FORMAT_STRING, "--", "------------", "---------", "-----", "-------");
+                int remainingLength;
+                var formatString = helpers.GetFormatString(out remainingLength);
+                Console.WriteLine(formatString, "ID", "RelativeTime", "EventName", "Level", "Payload");
+                Console.WriteLine(formatString, "--", "------------", "---------", "-----", "-------");
             }
 
             Stopwatch timer = new Stopwatch();
