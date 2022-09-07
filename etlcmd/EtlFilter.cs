@@ -107,7 +107,7 @@ namespace etlcmd
                     data.TimeStampRelativeMSec,
                     data.EventName.Truncate(30),
                     data.Level.ToString(),
-                    payloadData.Truncate(remainingLength));
+                    payloadData);
             }
         }
 
@@ -225,7 +225,7 @@ namespace etlcmd
             {
                 int remainingLength;
                 var formatString = helpers.GetFormatString(out remainingLength);
-                Console.WriteLine(formatString, "ID", "RelativeTime", "EventName", "Level", "Payload");
+                Console.WriteLine(formatString, "ID", "Timestamp-ms", "EventName", "Level", "Payload");
                 Console.WriteLine(formatString, "--", "------------", "---------", "-----", "-------");
             }
 
