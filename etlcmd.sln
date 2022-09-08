@@ -5,6 +5,8 @@ VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "etlcmd", "etlcmd\etlcmd.csproj", "{47B21190-E78D-4450-B8EC-EEB0A8597CA3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PsEtl.Cmdlet", "PsEtl.Cmdlet\PsEtl.Cmdlet.csproj", "{9B3CC48A-F46A-4DE4-97FA-8A12A2C1200C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{47B21190-E78D-4450-B8EC-EEB0A8597CA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47B21190-E78D-4450-B8EC-EEB0A8597CA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47B21190-E78D-4450-B8EC-EEB0A8597CA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B3CC48A-F46A-4DE4-97FA-8A12A2C1200C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B3CC48A-F46A-4DE4-97FA-8A12A2C1200C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B3CC48A-F46A-4DE4-97FA-8A12A2C1200C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B3CC48A-F46A-4DE4-97FA-8A12A2C1200C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
