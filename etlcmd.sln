@@ -9,18 +9,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PsEtl.Cmdlet", "PsEtl.Cmdle
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{47B21190-E78D-4450-B8EC-EEB0A8597CA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{47B21190-E78D-4450-B8EC-EEB0A8597CA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{47B21190-E78D-4450-B8EC-EEB0A8597CA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{47B21190-E78D-4450-B8EC-EEB0A8597CA3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9B3CC48A-F46A-4DE4-97FA-8A12A2C1200C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9B3CC48A-F46A-4DE4-97FA-8A12A2C1200C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9B3CC48A-F46A-4DE4-97FA-8A12A2C1200C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9B3CC48A-F46A-4DE4-97FA-8A12A2C1200C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47B21190-E78D-4450-B8EC-EEB0A8597CA3}.Debug|x64.ActiveCfg = Debug|x64
+		{47B21190-E78D-4450-B8EC-EEB0A8597CA3}.Debug|x64.Build.0 = Debug|x64
+		{47B21190-E78D-4450-B8EC-EEB0A8597CA3}.Release|x64.ActiveCfg = Release|x64
+		{47B21190-E78D-4450-B8EC-EEB0A8597CA3}.Release|x64.Build.0 = Release|x64
+		{9B3CC48A-F46A-4DE4-97FA-8A12A2C1200C}.Debug|x64.ActiveCfg = Debug|x64
+		{9B3CC48A-F46A-4DE4-97FA-8A12A2C1200C}.Debug|x64.Build.0 = Debug|x64
+		{9B3CC48A-F46A-4DE4-97FA-8A12A2C1200C}.Release|x64.ActiveCfg = Release|x64
+		{9B3CC48A-F46A-4DE4-97FA-8A12A2C1200C}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
